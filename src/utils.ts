@@ -22,21 +22,6 @@ export function useOnClickOutside<T>(
 
 type RefCallback<T> = (node: HTMLElement, old: T) => void;
 
-export function useRefWithCallback<T>(
-  callback: RefCallback<T>
-): [React.MutableRefObject<T>, (node: any) => void] {
-  const ref = useRef<T>();
-  const setRef = useCallback(
-    node => {
-      const old = ref.current;
-      ref.current = node;
-      callback(node, old);
-    },
-    [callback]
-  );
-  return [ref, setRef];
-}
-
 export const sortBy = (arr: any[], comp: (any) => any): any[] => {
   return arr.sort((a, b) => {
     const aComp = comp(a);
